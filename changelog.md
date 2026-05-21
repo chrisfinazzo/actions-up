@@ -1,5 +1,18 @@
 # Changelog
 
+## v1.14.2
+
+[compare changes](https://github.com/azat-io/actions-up/compare/v1.14.1...v1.14.2)
+
+### 🐞 Bug Fixes
+
+- Preserve tag granularity and avoid suffix duplication
+  ([0d3efe1](https://github.com/azat-io/actions-up/commit/0d3efe1))
+
+### ❤️ Contributors
+
+- Azat S. ([@azat-io](https://github.com/azat-io))
+
 ## v1.14.1
 
 [compare changes](https://github.com/azat-io/actions-up/compare/v1.14.0...v1.14.1)
