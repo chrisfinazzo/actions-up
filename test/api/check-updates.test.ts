@@ -1226,7 +1226,7 @@ describe('checkUpdates', () => {
 
     let actions: GitHubAction[] = [
       {
-        version: undefined as unknown as string,
+        version: undefined,
         uses: 'owner/repo',
         name: 'owner/repo',
         ref: 'owner/repo',
@@ -1886,7 +1886,7 @@ describe('checkUpdates', () => {
           message: null,
           sha: 'zzz',
           date: null,
-        } as unknown as { message: null; tag: string; sha: string; date: null },
+        },
         { sha: 'validSha', tag: 'v1.1.0', message: null, date: null },
       ]),
       getLatestRelease: vi.fn().mockResolvedValue(null),

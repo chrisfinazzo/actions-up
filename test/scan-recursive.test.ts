@@ -138,7 +138,7 @@ describe('scanRecursive', () => {
           typeof readdir
         >
       }
-      return Promise.resolve([]) as unknown as ReturnType<typeof readdir>
+      return Promise.resolve([])
     })
 
     vi.mocked(readFile).mockResolvedValue('workflow content')
@@ -188,7 +188,7 @@ describe('scanRecursive', () => {
           typeof readdir
         >
       }
-      return Promise.resolve([]) as unknown as ReturnType<typeof readdir>
+      return Promise.resolve([])
     })
 
     vi.mocked(readFile).mockResolvedValue('action content')
@@ -246,7 +246,7 @@ describe('scanRecursive', () => {
           typeof readdir
         >
       }
-      return Promise.resolve([]) as unknown as ReturnType<typeof readdir>
+      return Promise.resolve([])
     })
 
     vi.mocked(readFile).mockResolvedValue('action content')
@@ -291,7 +291,7 @@ describe('scanRecursive', () => {
           typeof readdir
         >
       }
-      return Promise.resolve([]) as unknown as ReturnType<typeof readdir>
+      return Promise.resolve([])
     })
 
     vi.mocked(readFile).mockResolvedValue('action content')
@@ -338,7 +338,7 @@ describe('scanRecursive', () => {
           typeof readdir
         >
       }
-      return Promise.resolve([]) as unknown as ReturnType<typeof readdir>
+      return Promise.resolve([])
     })
 
     vi.mocked(readFile).mockResolvedValue('random: content')
@@ -389,7 +389,7 @@ describe('scanRecursive', () => {
           typeof readdir
         >
       }
-      return Promise.resolve([]) as unknown as ReturnType<typeof readdir>
+      return Promise.resolve([])
     })
 
     vi.mocked(readFile).mockRejectedValue(new Error('EACCES'))
@@ -425,7 +425,7 @@ describe('scanRecursive', () => {
           typeof readdir
         >
       }
-      return Promise.resolve([]) as unknown as ReturnType<typeof readdir>
+      return Promise.resolve([])
     })
 
     vi.mocked(readFile).mockResolvedValue('workflow content')

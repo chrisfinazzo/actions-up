@@ -11,9 +11,9 @@ describe('extractUsesFromSteps (missing uses pair)', () => {
     let stepsNode = { items: [stepNode] }
 
     let actions = extractUsesFromSteps({
-      stepsNode: stepsNode as unknown,
       filePath: 'workflow.yml',
       content: 'content',
+      stepsNode,
     })
     expect(actions).toHaveLength(1)
     expect(actions[0]!.line).toBe(0)

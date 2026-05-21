@@ -35,33 +35,25 @@ describe('getUpdateLevel', () => {
   })
 
   it('returns unknown for unsupported diff types', () => {
-    let diffSpy = vi
-      .spyOn(semver, 'diff')
-      .mockReturnValue('prerelease' as semver.ReleaseType)
+    let diffSpy = vi.spyOn(semver, 'diff').mockReturnValue('prerelease')
     expect(getUpdateLevel('1.0.0', '1.0.1')).toBe('unknown')
     diffSpy.mockRestore()
   })
 
   it('maps premajor to major', () => {
-    let diffSpy = vi
-      .spyOn(semver, 'diff')
-      .mockReturnValue('premajor' as semver.ReleaseType)
+    let diffSpy = vi.spyOn(semver, 'diff').mockReturnValue('premajor')
     expect(getUpdateLevel('1.0.0', '2.0.0-rc.1')).toBe('major')
     diffSpy.mockRestore()
   })
 
   it('maps preminor to minor', () => {
-    let diffSpy = vi
-      .spyOn(semver, 'diff')
-      .mockReturnValue('preminor' as semver.ReleaseType)
+    let diffSpy = vi.spyOn(semver, 'diff').mockReturnValue('preminor')
     expect(getUpdateLevel('1.0.0', '1.1.0-beta.1')).toBe('minor')
     diffSpy.mockRestore()
   })
 
   it('maps prepatch to patch', () => {
-    let diffSpy = vi
-      .spyOn(semver, 'diff')
-      .mockReturnValue('prepatch' as semver.ReleaseType)
+    let diffSpy = vi.spyOn(semver, 'diff').mockReturnValue('prepatch')
     expect(getUpdateLevel('1.0.0', '1.0.1-beta.1')).toBe('patch')
     diffSpy.mockRestore()
   })

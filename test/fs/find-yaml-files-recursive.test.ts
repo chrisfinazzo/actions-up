@@ -50,7 +50,7 @@ describe('findYamlFilesRecursive', () => {
           'script.sh',
         ]) as unknown as ReturnType<typeof readdir>
       }
-      return Promise.resolve([]) as unknown as ReturnType<typeof readdir>
+      return Promise.resolve([])
     })
 
     let files = await findYamlFilesRecursive('/root')
@@ -100,7 +100,7 @@ describe('findYamlFilesRecursive', () => {
           'link-file.yml',
         ]) as unknown as ReturnType<typeof readdir>
       }
-      return Promise.resolve([]) as unknown as ReturnType<typeof readdir>
+      return Promise.resolve([])
     })
 
     let files = await findYamlFilesRecursive('/root')
@@ -116,9 +116,7 @@ describe('findYamlFilesRecursive', () => {
       isFile: () => false,
     } as unknown as Stats)
 
-    vi.mocked(readdir).mockResolvedValue(
-      [] as unknown as Awaited<ReturnType<typeof readdir>>,
-    )
+    vi.mocked(readdir).mockResolvedValue([])
 
     let files = await findYamlFilesRecursive('/empty')
 
@@ -181,9 +179,9 @@ describe('findYamlFilesRecursive', () => {
         >
       }
       if (value === '/root/sub') {
-        return Promise.resolve([]) as unknown as ReturnType<typeof readdir>
+        return Promise.resolve([])
       }
-      return Promise.resolve([]) as unknown as ReturnType<typeof readdir>
+      return Promise.resolve([])
     })
 
     await findYamlFilesRecursive('/root')
@@ -221,7 +219,7 @@ describe('findYamlFilesRecursive', () => {
           typeof readdir
         >
       }
-      return Promise.resolve([]) as unknown as ReturnType<typeof readdir>
+      return Promise.resolve([])
     })
 
     let files = await findYamlFilesRecursive('/root')
@@ -259,7 +257,7 @@ describe('findYamlFilesRecursive', () => {
           'also-good.yaml',
         ]) as unknown as ReturnType<typeof readdir>
       }
-      return Promise.resolve([]) as unknown as ReturnType<typeof readdir>
+      return Promise.resolve([])
     })
 
     let files = await findYamlFilesRecursive('/root')

@@ -1,5 +1,3 @@
-import type Enquirer from 'enquirer'
-
 import enquirer from 'enquirer'
 import 'node:worker_threads'
 import path from 'node:path'
@@ -277,11 +275,6 @@ interface PromptUpdateSelectionOptions {
   showAge?: boolean
 }
 
-type PromptOptions = Extract<
-  Parameters<Enquirer['prompt']>[0],
-  Record<string, unknown>
->
-
 export async function promptUpdateSelection(
   updates: ActionUpdate[],
   options: PromptUpdateSelectionOptions = {},
@@ -535,7 +528,7 @@ export async function promptUpdateSelection(
       name: `label|${file}`,
       isGroupLabel: true,
       enabled: false,
-    } as unknown as ChoiceItem)
+    })
 
     /**
      * Add a blank separator line between groups for readability.
@@ -614,9 +607,7 @@ export async function promptUpdateSelection(
       choices,
     }
 
-    let { selected } = await enquirer.prompt<PromptResult>(
-      promptOptions as unknown as PromptOptions,
-    )
+    let { selected } = await enquirer.prompt<PromptResult>(promptOptions)
 
     let selectedIndexes = getSelectedIndexes(selected, groups)
     let result = getSelectedUpdates(outdated, selectedIndexes)

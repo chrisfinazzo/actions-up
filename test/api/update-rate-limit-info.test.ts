@@ -32,8 +32,8 @@ describe('updateRateLimitInfo', () => {
       token: undefined,
     }
     updateRateLimitInfo(context, {
-      'x-ratelimit-reset': 1700000050 as unknown as string,
-      'x-ratelimit-remaining': 42 as unknown as string,
+      'x-ratelimit-reset': 1700000050,
+      'x-ratelimit-remaining': 42,
     })
     expect(context.rateLimitRemaining).toBe(42)
     expect(context.rateLimitReset).toEqual(new Date(1700000050 * 1000))

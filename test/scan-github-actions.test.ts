@@ -154,7 +154,7 @@ describe('scanGitHubActions', () => {
               pathValue.includes('workflows') || pathValue.includes('actions')
             )
           },
-        } as Stats) as ReturnType<typeof stat>,
+        } as Stats),
     )
 
     vi.mocked(readdir).mockImplementation(
@@ -176,16 +176,12 @@ describe('scanGitHubActions', () => {
       (path: Parameters<typeof readFile>[0]): ReturnType<typeof readFile> => {
         let pathValue = JSON.stringify(path)
         if (pathValue.includes('workflows')) {
-          return Promise.resolve('workflow content') as ReturnType<
-            typeof readFile
-          >
+          return Promise.resolve('workflow content')
         }
         if (pathValue.includes('action.yml')) {
-          return Promise.resolve('action content') as ReturnType<
-            typeof readFile
-          >
+          return Promise.resolve('action content')
         }
-        return Promise.resolve('') as ReturnType<typeof readFile>
+        return Promise.resolve('')
       },
     )
 
@@ -238,7 +234,7 @@ describe('scanGitHubActions', () => {
           typeof readdir
         >
       }
-      return Promise.resolve([]) as unknown as ReturnType<typeof readdir>
+      return Promise.resolve([])
     })
 
     let result = await scanGitHubActions('.')
@@ -290,7 +286,7 @@ describe('scanGitHubActions', () => {
           typeof readdir
         >
       }
-      return Promise.resolve([]) as unknown as ReturnType<typeof readdir>
+      return Promise.resolve([])
     })
 
     vi.mocked(readFile).mockResolvedValue('action content')
@@ -387,7 +383,7 @@ describe('scanGitHubActions', () => {
             typeof readdir
           >
         }
-        return Promise.resolve([]) as ReturnType<typeof readdir>
+        return Promise.resolve([])
       },
     )
 
@@ -429,7 +425,7 @@ describe('scanGitHubActions', () => {
             'script.sh',
           ]) as unknown as ReturnType<typeof readdir>
         }
-        return Promise.resolve([]) as ReturnType<typeof readdir>
+        return Promise.resolve([])
       },
     )
 
@@ -462,7 +458,7 @@ describe('scanGitHubActions', () => {
             'invalid.yml',
           ]) as unknown as ReturnType<typeof readdir>
         }
-        return Promise.resolve([]) as ReturnType<typeof readdir>
+        return Promise.resolve([])
       },
     )
 
@@ -500,7 +496,7 @@ describe('scanGitHubActions', () => {
 
     vi.mocked(readFile).mockImplementation((path: unknown) => {
       if (typeof path === 'string' && path.endsWith('action.yml')) {
-        return Promise.resolve('action content') as ReturnType<typeof readFile>
+        return Promise.resolve('action content')
       }
       return Promise.reject(new Error('ENOENT'))
     })
@@ -533,7 +529,7 @@ describe('scanGitHubActions', () => {
 
     vi.mocked(readFile).mockImplementation((path: unknown) => {
       if (typeof path === 'string' && path.endsWith('action.yml')) {
-        return Promise.resolve('action content') as ReturnType<typeof readFile>
+        return Promise.resolve('action content')
       }
       return Promise.reject(new Error('ENOENT'))
     })
@@ -568,7 +564,7 @@ describe('scanGitHubActions', () => {
 
     vi.mocked(readFile).mockImplementation((path: unknown) => {
       if (typeof path === 'string' && path.endsWith('action.yaml')) {
-        return Promise.resolve('action content') as ReturnType<typeof readFile>
+        return Promise.resolve('action content')
       }
       return Promise.reject(new Error('ENOENT'))
     })
@@ -650,7 +646,7 @@ describe('scanGitHubActions', () => {
             let pathValue = String(path)
             return pathValue.includes('.github')
           },
-        } as Stats) as ReturnType<typeof stat>,
+        } as Stats),
     )
 
     vi.mocked(readdir).mockImplementation(
@@ -661,7 +657,7 @@ describe('scanGitHubActions', () => {
             typeof readdir
           >
         }
-        return Promise.resolve([]) as unknown as ReturnType<typeof readdir>
+        return Promise.resolve([])
       },
     )
 
@@ -671,7 +667,7 @@ describe('scanGitHubActions', () => {
         if (pathValue.includes('action.yml')) {
           return Promise.reject(new Error('File not found'))
         }
-        return Promise.resolve('action content') as ReturnType<typeof readFile>
+        return Promise.resolve('action content')
       },
     )
 
@@ -817,7 +813,7 @@ describe('scanGitHubActions', () => {
           typeof readdir
         >
       }
-      return Promise.resolve([]) as unknown as ReturnType<typeof readdir>
+      return Promise.resolve([])
     })
 
     let previousRepo = process.env['GITHUB_REPOSITORY']
@@ -841,7 +837,7 @@ describe('scanGitHubActions', () => {
         }
         return Promise.resolve({
           isDirectory: () => pathValue.includes('actions'),
-        } as Stats) as ReturnType<typeof stat>
+        } as Stats)
       },
     )
 
@@ -858,7 +854,7 @@ describe('scanGitHubActions', () => {
         if (pathValue.includes('invalid')) {
           return Promise.reject(new Error('Read error'))
         }
-        return Promise.resolve('action content') as ReturnType<typeof readFile>
+        return Promise.resolve('action content')
       },
     )
 
@@ -927,7 +923,7 @@ describe('scanGitHubActions', () => {
           typeof readdir
         >
       }
-      return Promise.resolve([]) as unknown as ReturnType<typeof readdir>
+      return Promise.resolve([])
     })
 
     let result = await scanGitHubActions('.')
@@ -963,20 +959,16 @@ describe('scanGitHubActions', () => {
           typeof readdir
         >
       }
-      return Promise.resolve([]) as unknown as ReturnType<typeof readdir>
+      return Promise.resolve([])
     })
 
     vi.mocked(readFile).mockImplementation((path: unknown) => {
       let currentPath = String(path)
       if (currentPath.endsWith('coverage.yml')) {
-        return Promise.resolve('workflow content') as unknown as ReturnType<
-          typeof readFile
-        >
+        return Promise.resolve('workflow content')
       }
       if (currentPath.endsWith('setup-js/action.yml')) {
-        return Promise.resolve('action content') as unknown as ReturnType<
-          typeof readFile
-        >
+        return Promise.resolve('action content')
       }
       return Promise.reject(new Error('not used'))
     })
@@ -1028,7 +1020,7 @@ describe('scanGitHubActions', () => {
           '[remote "origin"]\n' +
             '    url = https://github.com/acme/demo.git\n' +
             '    fetch = +refs/heads/*:refs/remotes/origin/*\n',
-        ) as unknown as ReturnType<typeof readFile>
+        )
       }
       return Promise.reject(new Error('not used'))
     })
@@ -1051,7 +1043,7 @@ describe('scanGitHubActions', () => {
           '[remote "upstream"]\n' +
             '    url = git@github.com:acme/up.git\n' +
             '    fetch = +refs/heads/*:refs/remotes/upstream/*\n',
-        ) as unknown as ReturnType<typeof readFile>
+        )
       }
       return Promise.reject(new Error('not used'))
     })
@@ -1089,7 +1081,7 @@ describe('scanGitHubActions', () => {
             typeof readdir
           >
         }
-        return Promise.resolve([]) as ReturnType<typeof readdir>
+        return Promise.resolve([])
       },
     )
 
@@ -1122,7 +1114,7 @@ describe('scanGitHubActions', () => {
             'test.yml',
           ]) as unknown as ReturnType<typeof readdir>
         }
-        return Promise.resolve([]) as ReturnType<typeof readdir>
+        return Promise.resolve([])
       },
     )
 
@@ -1178,7 +1170,7 @@ describe('scanGitHubActions', () => {
 
     vi.mocked(readdir).mockImplementation((path: unknown) => {
       if (typeof path === 'string' && path.endsWith('workflows')) {
-        return Promise.resolve([]) as unknown as ReturnType<typeof readdir>
+        return Promise.resolve([])
       }
       return Promise.resolve(['README.md']) as unknown as ReturnType<
         typeof readdir
@@ -1220,7 +1212,7 @@ describe('scanGitHubActions', () => {
           typeof readdir
         >
       }
-      return Promise.resolve([]) as unknown as ReturnType<typeof readdir>
+      return Promise.resolve([])
     })
 
     vi.mocked(readFile).mockResolvedValue('content')
@@ -1267,20 +1259,16 @@ describe('scanGitHubActions', () => {
           typeof readdir
         >
       }
-      return Promise.resolve([]) as unknown as ReturnType<typeof readdir>
+      return Promise.resolve([])
     })
 
     vi.mocked(readFile).mockImplementation((path: unknown) => {
       let currentPath = String(path)
       if (currentPath.endsWith('test.yml')) {
-        return Promise.resolve('workflow') as unknown as ReturnType<
-          typeof readFile
-        >
+        return Promise.resolve('workflow')
       }
       if (currentPath.endsWith('empty-action/action.yml')) {
-        return Promise.resolve('action') as unknown as ReturnType<
-          typeof readFile
-        >
+        return Promise.resolve('action')
       }
       return Promise.reject(new Error('not found'))
     })
@@ -1327,7 +1315,7 @@ describe('scanGitHubActions', () => {
           '[remote "origin"]\n' +
             '    url = invalid-url-format\n' +
             '    fetch = +refs/heads/*:refs/remotes/origin/*\n',
-        ) as unknown as ReturnType<typeof readFile>
+        )
       }
       return Promise.reject(new Error('not used'))
     })
