@@ -766,6 +766,48 @@ describe('applyUpdates', () => {
     expect(content).not.toContain('# v3.1.2')
   })
 
+  it('does not duplicate suffix for preserve-style overlapping tag refs', async () => {
+    let filePath = '/repo/.github/workflows/preserve-overlap.yml'
+    let original = [
+      'steps:',
+      '  - uses: actions/checkout@v6.0.2',
+      '  - uses: actions/checkout@v6',
+      '',
+    ].join('\n')
+
+    let { writeFile, readFile } = await import('node:fs/promises')
+    vi.mocked(readFile).mockResolvedValue(original)
+
+    let updates: ActionUpdate[] = [
+      {
+        action: {
+          name: 'actions/checkout',
+          type: 'external',
+          file: filePath,
+          version: 'v6',
+        },
+        latestVersion: 'v6.0.2',
+        currentRefType: 'tag',
+        targetRefStyle: 'tag',
+        currentVersion: 'v6',
+        targetRef: 'v6.0.2',
+        isBreaking: false,
+        publishedAt: null,
+        latestSha: null,
+        hasUpdate: true,
+      },
+    ]
+
+    await applyUpdates(updates)
+
+    expect(writeFile).toHaveBeenCalledOnce()
+    let [, content] = vi.mocked(writeFile).mock.calls[0]!
+    assertString(content)
+    expect(content).toContain('- uses: actions/checkout@v6.0.2')
+    expect(content.match(/actions\/checkout@v6\.0\.2/gu)).toHaveLength(2)
+    expect(content).not.toContain('v6.0.2.0.2')
+  })
+
   it('logs error when target ref contains a newline', async () => {
     let filePath = '/repo/.github/workflows/invalid-target-ref.yml'
     let original = `steps:\n  - uses: actions/cache@v3\n`

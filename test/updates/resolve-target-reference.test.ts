@@ -33,8 +33,34 @@ describe('resolveTargetReference', () => {
   it('resolves tag target in preserve style for tag refs', () => {
     let result = resolveTargetReference(createUpdate(), 'preserve')
 
-    expect(result.targetRef).toBe('v5.0.0')
+    expect(result.targetRef).toBe('v5')
     expect(result.targetRefStyle).toBe('tag')
+  })
+
+  it('preserves minor-only tag refs in preserve style', () => {
+    let result = resolveTargetReference(
+      createUpdate({
+        latestVersion: 'v4.2.3',
+        currentVersion: 'v4.1',
+      }),
+      'preserve',
+    )
+
+    expect(result.targetRef).toBe('v4.2')
+    expect(result.targetRefStyle).toBe('tag')
+  })
+
+  it('returns null target when preserve style cannot keep tag granularity', () => {
+    let result = resolveTargetReference(
+      createUpdate({
+        currentVersion: 'v4.1',
+        latestVersion: 'v5',
+      }),
+      'preserve',
+    )
+
+    expect(result.targetRef).toBeNull()
+    expect(result.targetRefStyle).toBeNull()
   })
 
   it('keeps sha target in preserve style for sha refs', () => {

@@ -73,6 +73,8 @@ export async function applyUpdates(updates: ActionUpdate[]): Promise<void> {
         let escapedName = escapeRegExp(update.action.name)
         let escapedVersion =
           update.currentVersion ? escapeRegExp(update.currentVersion) : ''
+        let boundary =
+          escapedVersion ? String.raw`(?=(?:['"]|[ \t\]}{,#]|$))` : ''
 
         if (escapedName.includes('\n') || escapedName.includes('\r')) {
           console.error(`Invalid action name: ${update.action.name}`)
@@ -130,7 +132,7 @@ export async function applyUpdates(updates: ActionUpdate[]): Promise<void> {
             /**
              * Action name before @.
              */
-            String.raw`(?<name>${escapedName})@${escapedVersion}` +
+            String.raw`(?<name>${escapedName})@${escapedVersion}${boundary}` +
             String.raw`\k<quote>` +
             /**
              * Trailing delimiters/spaces after the ref.

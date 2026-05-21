@@ -1,6 +1,8 @@
 import type { ActionUpdate } from '../../types/action-update'
 import type { UpdateStyle } from '../../types/update-style'
 
+import { preserveTagFormat } from '../versions/preserve-tag-format'
+
 /**
  * Resolve the final reference that should be written back to the workflow.
  *
@@ -41,9 +43,17 @@ export function resolveTargetReference(
   }
 
   if (update.currentRefType === 'tag' && update.latestVersion) {
+    let preservedTarget = preserveTagFormat(
+      update.currentVersion,
+      update.latestVersion,
+    )
+    if (!preservedTarget) {
+      return { ...update, targetRefStyle: null, targetRef: null }
+    }
+
     return {
       ...update,
-      targetRef: update.latestVersion,
+      targetRef: preservedTarget,
       targetRefStyle: 'tag',
     }
   }

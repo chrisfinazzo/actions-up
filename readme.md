@@ -214,9 +214,11 @@ Use `--style preserve` to keep the current reference style:
 npx actions-up --style preserve
 ```
 
-`preserve` keeps tag references on tags and SHA references on SHAs. For example,
-`actions/checkout@v5` updates to `actions/checkout@v6.0.2`, while a SHA-pinned
-action continues updating to the latest resolved SHA.
+`preserve` keeps tag references on tags and SHA references on SHAs. Tag refs
+also keep their granularity, so `actions/checkout@v5` updates to
+`actions/checkout@v6`, while `actions/checkout@v5.0` updates to
+`actions/checkout@v6.0`. A SHA-pinned action continues updating to the latest
+resolved SHA.
 
 ## GitHub Actions Integration
 

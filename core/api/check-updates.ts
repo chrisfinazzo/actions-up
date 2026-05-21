@@ -5,6 +5,7 @@ import type { GitHubAction } from '../../types/github-action'
 import type { ActionUpdate } from '../../types/action-update'
 import type { UpdateStyle } from '../../types/update-style'
 
+import { preserveTagFormat } from '../versions/preserve-tag-format'
 import { normalizeVersion } from '../versions/normalize-version'
 import { createGitHubClient } from './create-github-client'
 import { isSemverLike } from '../versions/is-semver-like'
@@ -540,9 +541,15 @@ function createUpdate(
   let { version: latestVersion, sha: latestSha, publishedAt } = latest
   let currentVersionRaw = action.version ?? 'unknown'
   let currentVersion = normalizeVersion(currentVersionRaw)
-  let normalized = latestVersion ? normalizeVersion(latestVersion) : null
   let currentReferenceType = meta.currentRefType
   let { style } = meta
+  let preservedLatestVersion =
+    style === 'preserve' && currentReferenceType === 'tag' ?
+      preserveTagFormat(currentVersionRaw, latestVersion)
+    : null
+  let effectiveLatestVersion = preservedLatestVersion ?? latestVersion
+  let normalized =
+    effectiveLatestVersion ? normalizeVersion(effectiveLatestVersion) : null
 
   /**
    * Default status is ok unless explicitly marked skipped.
