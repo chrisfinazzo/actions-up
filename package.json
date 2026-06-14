@@ -60,7 +60,6 @@
     "test:usage": "knip"
   },
   "dependencies": {
-    "cac": "^7.0.0",
     "enquirer": "^2.4.1",
     "nanospinner": "^1.2.2",
     "picocolors": "^1.1.1",
@@ -92,6 +91,6 @@
     "vitest": "^4.1.8"
   },
   "engines": {
-    "node": "^18.0.0 || >=20.0.0"
+    "node": "^18.3.0 || >=20.0.0"
   }
 }

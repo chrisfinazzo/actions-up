@@ -96,7 +96,7 @@ Feature requests are welcome! Please:
 
 ### Prerequisites
 
-- Node.js ^18 or >=20 (LTS recommended)
+- Node.js ^18.3 or >=20 (LTS recommended)
 - pnpm 10
 - Git
 
