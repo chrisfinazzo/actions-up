@@ -1,5 +1,18 @@
 # Changelog
 
+## v1.14.3
+
+[compare changes](https://github.com/azat-io/actions-up/compare/v1.14.2...v1.14.3)
+
+### 🐞 Bug Fixes
+
+- Restore node 18 support
+  ([cdd6000](https://github.com/azat-io/actions-up/commit/cdd6000))
+
+### ❤️ Contributors
+
+- Azat S. ([@azat-io](https://github.com/azat-io))
+
 ## v1.14.2
 
 [compare changes](https://github.com/azat-io/actions-up/compare/v1.14.1...v1.14.2)
